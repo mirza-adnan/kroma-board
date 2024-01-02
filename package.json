@@ -4,7 +4,10 @@
   "description": "A place to store all the nice colors you come across online",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./server/index.js",
+    "server": "nodemon ./server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +15,7 @@
     "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
