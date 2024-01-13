@@ -4,8 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: "#ffd008",
-        accentDarker: "#d6af00",
+        accent: {
+          light: "#fffae6",
+          DEFAULT: "#ffd008",
+          dark: "#d6af00",
+        },
         bright: "#eeeeee",
         dark: "#121212",
         darkish: {
@@ -17,6 +20,10 @@ export default {
           600: "#141414",
           700: "#111111",
         },
+      },
+      spacing: {
+        header: "70px",
+        sidebar: "280px",
       },
     },
     fontFamily: {
