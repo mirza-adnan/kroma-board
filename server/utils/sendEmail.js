@@ -16,7 +16,7 @@ const sendConfirmationEmail = (name, email, confirmationCode) => {
   transporter.sendMail({
     from: config.email,
     to: email,
-    subject: "Please confirm your account",
+    subject: "Please confirm your Kroma Board account",
     html: `<h1>Email Confirmation</h1>
     <h2>Hello ${name}</h2>
     <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
