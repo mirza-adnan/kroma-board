@@ -12,7 +12,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendConfirmationEmail = (name, email, confirmationCode) => {
-  console.log(config.email, config.pass);
   transporter.sendMail({
     from: config.email,
     to: email,
@@ -20,7 +19,7 @@ const sendConfirmationEmail = (name, email, confirmationCode) => {
     html: `<h1>Email Confirmation</h1>
     <h2>Hello ${name}</h2>
     <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-    <a href="http://localhost:8081/api/verify/${confirmationCode}" target="_blank"> Click here</a>
+    <a href="http://localhost:5173/verify/${confirmationCode}" target="_blank"> Click here</a>
     </div>`,
   });
 };

@@ -13,10 +13,10 @@ function Nav() {
       </li>
       <li>
         <Link
-          to="/register"
+          to="/signup"
           className="transition-colors duration-200 py-2 px-4 bg-accent rounded-full text-dark hover:bg-bright"
         >
-          Register
+          Sign Up
         </Link>
       </li>
     </ul>

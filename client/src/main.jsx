@@ -5,7 +5,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Board from "./pages/Board.page.jsx";
 import Login from "./pages/Login.page.jsx";
-import Register from "./pages/Register.page.jsx";
+import Signup from "./pages/Signup.page.jsx";
+import VerifyPrompt from "./pages/VerifyPrompt.page.jsx";
+import Verification from "./components/Verification.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/board",
         element: <Board />,
       },
       {
@@ -21,8 +23,16 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/register",
-        element: <Register />,
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/verify",
+        element: <VerifyPrompt />,
+      },
+      {
+        path: "/verify/:id",
+        element: <Verification />,
       },
     ],
   },

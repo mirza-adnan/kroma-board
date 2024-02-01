@@ -4,6 +4,8 @@ import Container from "../components/Container";
 import Sidebar from "../components/Sidebar";
 import boards from "../data/boards";
 import colors from "../data/colors";
+import useStore from "../store/store";
+import { useNavigate } from "react-router-dom";
 
 function Board() {
   const colorsData = [
@@ -51,6 +53,8 @@ function Board() {
   const [value, setValue] = useState("");
   const [boardId, setBoardId] = useState("");
   const [currColors, setCurrColors] = useState([]);
+  const user = useStore((state) => state.user);
+  const navigate = useNavigate();
 
   const handleBoardChange = (id) => {
     setBoardId(id);
@@ -81,6 +85,12 @@ function Board() {
         : [...colors]
     );
   }, [boardId]);
+
+  if (!user.email) {
+    navigate("/login");
+  } else if (!user.verified) {
+    navigate("/verify");
+  }
 
   return (
     <div className="bg-dark flex-1 px-4">

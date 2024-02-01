@@ -6,7 +6,7 @@ const clearJwtCookie = require("../utils/clearJwtCookie");
 const { sendMsg, sendError } = require("../utils/response");
 const { sendConfirmationEmail } = require("../utils/sendEmail");
 
-const registerUser = asyncHandler(async (req, res) => {
+const signupUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
@@ -30,6 +30,20 @@ const registerUser = asyncHandler(async (req, res) => {
   res.status(201).json(savedUser);
 });
 
+const verifyUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  let user = await User.findById(id);
+
+  if (!user) {
+    sendError(res, 401, "User not found.");
+  } else {
+    user.verified = true;
+    user = await user.save();
+
+    res.status(200).json(user);
+  }
+});
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -50,7 +64,8 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  registerUser,
+  signupUser,
+  verifyUser,
   loginUser,
   logoutUser,
 };
