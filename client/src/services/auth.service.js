@@ -10,6 +10,7 @@ const signup = async (info) => {
 
 const verifyUser = async (id) => {
   const res = await axios.get(`${baseUrl}/user/verify/${id}`);
+  localStorage.setItem("user", JSON.stringify(res.data));
   return res.data;
 };
 
@@ -26,10 +27,12 @@ const logout = async () => {
 };
 
 const isLoggedIn = () => {
+  console.log(!!localStorage.getItem("user"));
   return !!localStorage.getItem("user");
 };
 
 const getFromLocal = () => {
+  console.log(JSON.parse(localStorage.getItem("user")));
   return JSON.parse(localStorage.getItem("user"));
 };
 

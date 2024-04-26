@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 import Nav from "./Nav";
 import useStore from "../store/store";
 import authService from "../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await authService.logout();
-      setUser({});
+      setUser(null);
+      navigate("/login");
     } catch (err) {
       console.log(err.response.data);
     }
@@ -22,7 +25,7 @@ function Header() {
         <h1 className="text-3xl">
           <Link to="/">KROMA</Link>
         </h1>
-        {user.email ? (
+        {user?.email ? (
           <button
             className="text-lg transition-colors duration-200 hover:text-accent"
             onClick={handleLogout}

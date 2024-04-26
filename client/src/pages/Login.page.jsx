@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Container from "../components/Container";
 import useStore from "../store/store";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import authService from "../services/auth.service";
 
 function Login() {
@@ -34,7 +34,7 @@ function Login() {
       });
       setUser(user);
       setInfo({ email: "", password: "" });
-      navigate(redirect);
+      navigate("/board");
     } catch (err) {
       console.log(err.response.data);
     }
@@ -87,6 +87,19 @@ function Login() {
               Login
             </button>
           </form>
+          <p
+            style={{ color: "#d0d0d0" }}
+            className="mt-4"
+          >
+            Create an account{" "}
+            <Link
+              to="/signup"
+              className="text-accent underline"
+            >
+              here
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </Container>
