@@ -5,6 +5,8 @@ const useStore = create((set) => ({
   setUser: (newUser) => set(() => ({ user: newUser })),
   boards: [],
   setBoards: (newBoards) => set(() => ({ boards: newBoards })),
+  currBoardID: "",
+  setCurrBoardID: (newBoardID) => set(() => ({ currBoardID: newBoardID })),
 }));
 
 export default useStore;

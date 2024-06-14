@@ -54,7 +54,7 @@ function App() {
               element={<VerifyPrompt />}
             />
             <Route
-              path="/board"
+              path="/board/*"
               element={<Board />}
             />
           </Route>

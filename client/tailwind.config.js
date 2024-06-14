@@ -20,6 +20,7 @@ export default {
           600: "#141414",
           700: "#111111",
         },
+        modalBg: "rgba(0%, 0%, 0%, 0.7)",
       },
       spacing: {
         header: "70px",
