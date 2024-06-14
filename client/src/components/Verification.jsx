@@ -1,8 +1,9 @@
-import { useEffect } from "react";
 import { Circles } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import useStore from "../store/store";
 import authService from "../services/auth.service";
+import boardService from "../services/board.service";
+import { useEffect } from "react";
 
 function Verification() {
   const { id } = useParams();
@@ -10,12 +11,14 @@ function Verification() {
   const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
 
-  if (!user.verified) {
-    authService.verifyUser(id).then((data) => {
-      setUser(data);
-      navigate("/board");
-    });
-  }
+  useEffect(() => {
+    if (!user?.verified) {
+      authService.verifyUser(id).then((data) => {
+        setUser(data);
+        navigate("/board");
+      });
+    }
+  }, []);
 
   return (
     <Circles

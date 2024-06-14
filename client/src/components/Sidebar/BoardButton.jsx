@@ -1,6 +1,6 @@
-function BoardButton({ name, handleBoardChange, id }) {
+function BoardButton({ name, id }) {
   return (
-    <div className="mt-4">
+    <div className="my-4">
       <button
         className="flex justify-start items-center gap-6 font-bold text-md py-3 px-4 text-center w-full bg-dark rounded-xl text-bright transition-colors hover:bg-accent-light hover:text-accent-dark duration-300"
         onClick={() => handleBoardChange(id)}

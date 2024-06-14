@@ -1,11 +1,17 @@
 require("dotenv").config();
 
 const express = require("express");
+const connectDB = require("./config/connectDB");
+
+// MIDDLEWARE
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
-const connectDB = require("./config/connectDB");
-const userRouter = require("./routes/user.router");
+
+// ROUTERS
+const userRouter = require("./routes/users.router");
+const colorsRouter = require("./routes/colors.router");
+const boardsRouter = require("./routes/boards.router");
 
 // CONFIGURATIONS
 connectDB();
@@ -21,6 +27,8 @@ app.get("/ping", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/color", colorsRouter);
+app.use("/api/board", boardsRouter);
 
 // ERROR HANDLING
 app.use(notFound);

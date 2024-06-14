@@ -5,6 +5,7 @@ const setJwtCookie = require("../utils/setJwtCookie");
 const clearJwtCookie = require("../utils/clearJwtCookie");
 const { sendMsg, sendError } = require("../utils/response");
 const { sendConfirmationEmail } = require("../utils/sendEmail");
+const Board = require("../models/Board.model");
 
 const signupUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -37,18 +38,26 @@ const verifyUser = asyncHandler(async (req, res) => {
   if (!user) {
     sendError(res, 401, "User not found.");
   } else {
-    user.verified = true;
-    user = await user.save();
+    if (!user.verified) {
+      user.verified = true;
+      user = await user.save();
 
-    res.status(200).json(user);
+      const defaultBoard = new Board({
+        name: "THE Board",
+        length: 0,
+        default: true,
+        userID: id,
+      });
+      await defaultBoard.save();
+
+      res.status(200).json(user);
+    }
   }
 });
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-
-  console.log(user);
 
   if (user && (await user.matchPassword(password))) {
     setJwtCookie(res, user._id, "30d");

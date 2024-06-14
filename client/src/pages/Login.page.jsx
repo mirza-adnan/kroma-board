@@ -14,7 +14,7 @@ function Login() {
 
   const navigate = useNavigate();
   const { search } = useLocation();
-  const redirect = new URLSearchParams(search).get("redirect") || "/board";
+  // const redirect = new URLSearchParams(search).get("redirect") || "/board";
 
   const handleChange = (e) => {
     setInfo((prev) => {

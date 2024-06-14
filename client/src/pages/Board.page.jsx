@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { validateColor } from "../lib/colorPatterns";
 import Container from "../components/Container";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import boards from "../data/boards";
 import colors from "../data/colors";
 import useStore from "../store/store";
@@ -86,10 +86,7 @@ function Board() {
 
   return (
     <div className="bg-dark flex-1 px-4">
-      <Sidebar
-        boards={boards}
-        handleBoardChange={handleBoardChange}
-      />
+      <Sidebar />
       <div className="ml-sidebar transition-[margin] duration-200">
         <div>
           <form

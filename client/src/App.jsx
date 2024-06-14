@@ -15,16 +15,18 @@ import RequireAuth from "./components/RequireAuth";
 // TODO: Protected Routes
 
 function App() {
-  const isLoggedIn = authService.isLoggedIn();
   const setUser = useStore((state) => state.setUser);
   const navigate = useNavigate();
 
+  // controlling where to go on intitial page load based on logged in status
   useEffect(() => {
     if (authService.isLoggedIn()) {
       setUser(authService.getFromLocal());
       navigate("/board");
+    } else {
+      navigate("/login");
     }
-  }, [setUser]);
+  }, []);
 
   return (
     <>
@@ -35,15 +37,15 @@ function App() {
           element={<Layout />}
         >
           <Route
-            path="login"
+            path="/login"
             element={<Login />}
           />
           <Route
-            path="signup"
+            path="/signup"
             element={<Signup />}
           />
           <Route
-            path="verify/:id"
+            path="/verify/:id"
             element={<Verification />}
           />
           <Route element={<RequireAuth />}>
@@ -52,7 +54,7 @@ function App() {
               element={<VerifyPrompt />}
             />
             <Route
-              path="board"
+              path="/board"
               element={<Board />}
             />
           </Route>

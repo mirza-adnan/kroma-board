@@ -5,6 +5,12 @@ import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
+
+  if (authService.isLoggedIn()) {
+    navigate("/board");
+  }
+
   const [info, setInfo] = useState({
     name: "",
     email: "",
@@ -12,7 +18,6 @@ function Signup() {
   });
 
   const setUser = useStore((state) => state.setUser);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInfo((prev) => {
