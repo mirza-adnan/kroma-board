@@ -11,4 +11,9 @@ const getBoardsByID = async (userID) => {
   return res.data;
 };
 
-export default { createDefaultBoard, getBoardsByID };
+const createBoard = async (board) => {
+  const res = await axios.post(`${baseURL}/board/create`, board);
+  return res.data;
+};
+
+export default { createDefaultBoard, getBoardsByID, createBoard };

@@ -4,9 +4,9 @@ const User = require("../models/User.model");
 const { sendError } = require("../utils/response");
 
 const getColors = asyncHandler(async (req, res) => {
-  const { userID } = req.body;
+  const { userID, boardID } = req.params;
 
-  const colors = await Color.find({ user });
+  const colors = await Color.find({ userID, boardID });
   return res.status(200).json(colors);
 });
 
