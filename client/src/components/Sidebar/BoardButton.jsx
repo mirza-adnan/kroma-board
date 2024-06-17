@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 function BoardButton({ name, id }) {
   return (
     <div className="my-4">
-      <button
+      <Link
+        to={`/board/${id}`}
         className="flex justify-start items-center gap-6 font-bold text-md py-3 px-4 text-center w-full bg-dark rounded-xl text-bright transition-colors hover:bg-accent-light hover:text-accent-dark duration-300"
-        onClick={() => handleBoardChange(id)}
       >
         <span>
           <svg
@@ -21,7 +23,7 @@ function BoardButton({ name, id }) {
           </svg>
         </span>
         <span className="text-left">{name}</span>
-      </button>
+      </Link>
     </div>
   );
 }

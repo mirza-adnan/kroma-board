@@ -10,6 +10,7 @@ import Verification from "./components/Verification";
 import VerifyPrompt from "./pages/VerifyPrompt.page";
 import Board from "./pages/Board.page";
 import RequireAuth from "./components/RequireAuth";
+import ColorBoard from "./components/Board/ColorBoard";
 
 // TODO: Data Validation
 // TODO: Protected Routes
@@ -17,13 +18,11 @@ import RequireAuth from "./components/RequireAuth";
 function App() {
   const setUser = useStore((state) => state.setUser);
   const navigate = useNavigate();
+  const user = useStore((state) => state.user);
 
   // controlling where to go on intitial page load based on logged in status
   useEffect(() => {
-    if (authService.isLoggedIn()) {
-      setUser(authService.getFromLocal());
-      navigate("/board");
-    } else {
+    if (!authService.isLoggedIn()) {
       navigate("/login");
     }
   }, []);
@@ -56,7 +55,12 @@ function App() {
             <Route
               path="/board/*"
               element={<Board />}
-            />
+            >
+              <Route
+                path=":boardID"
+                element={<ColorBoard />}
+              ></Route>
+            </Route>
           </Route>
         </Route>
       </Routes>

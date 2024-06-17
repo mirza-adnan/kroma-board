@@ -5,7 +5,8 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import boards from "../data/boards";
 import colors from "../data/colors";
 import useStore from "../store/store";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import BoardForm from "../components/Board/BoardForm";
 
 function Board() {
   const colorsData = [
@@ -88,29 +89,9 @@ function Board() {
     <div className="bg-dark flex-1 px-4">
       <Sidebar />
       <div className="ml-sidebar transition-[margin] duration-200">
-        <div>
-          <form
-            className="flex justify-center items-center gap-8 my-12"
-            onSubmit={handleAdd}
-          >
-            <input
-              className="h-[43px] py-3 px-4 shadow-lg min-w-[350px] rounded-full focus:border-none focus:outline-none font-medium"
-              type="text"
-              value={value}
-              placeholder="e.g. #542ef9, hsl(93, 75%, 60%)"
-              onChange={(e) => {
-                setValue(e.target.value);
-              }}
-            />
-            <button
-              type="submit"
-              className="bg-accent h-[43px] px-8 rounded-full font-medium text-md text-dark"
-            >
-              Add
-            </button>
-          </form>
-        </div>
-        <Container
+        <BoardForm />
+        <Outlet />
+        {/* <Container
           classes="flex justify-center items-center flex-wrap gap-14 mt-16"
           width={500}
         >
@@ -127,7 +108,7 @@ function Board() {
               <p className="font-medium text-bright mt-2">{color.name}</p>
             </div>
           ))}
-        </Container>
+        </Container> */}
       </div>
     </div>
   );

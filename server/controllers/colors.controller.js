@@ -5,18 +5,12 @@ const { sendError } = require("../utils/response");
 
 const getColors = asyncHandler(async (req, res) => {
   const { userID, boardID } = req.params;
-
   const colors = await Color.find({ userID, boardID });
   return res.status(200).json(colors);
 });
 
 const createColor = asyncHandler(async (req, res) => {
-  const { value, hex, user } = req.body;
-  const color = new Color({
-    value,
-    hex,
-    user,
-  });
+  const color = new Color(req.body);
   const savedColor = await color.save();
 
   res.status(201).json(savedColor);

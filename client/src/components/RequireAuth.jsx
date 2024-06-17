@@ -1,9 +1,10 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useStore from "../store/store";
+import authService from "../services/auth.service";
 
 function RequireAuth() {
-  const user = useStore((state) => state.user);
   const location = useLocation();
+  const user = useStore((state) => state.user);
 
   return user ? (
     <Outlet />

@@ -1,7 +1,12 @@
+import { Link } from "react-router-dom";
+
 function DefaultButton({ id }) {
   return (
     <div className="">
-      <button className="flex justify-start items-center gap-6 font-bold text-md py-3 px-4 text-center w-full bg-accent rounded-xl text-dark">
+      <Link
+        to={`/board/${id}`}
+        className="flex justify-start items-center gap-6 font-bold text-md py-3 px-4 text-center w-full bg-accent rounded-xl text-dark"
+      >
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +20,7 @@ function DefaultButton({ id }) {
           </svg>
         </span>
         <span>THE Board</span>
-      </button>
+      </Link>
     </div>
   );
 }
