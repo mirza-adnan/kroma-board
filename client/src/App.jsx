@@ -11,6 +11,7 @@ import VerifyPrompt from "./pages/VerifyPrompt.page";
 import Board from "./pages/Board.page";
 import RequireAuth from "./components/RequireAuth";
 import ColorBoard from "./components/Board/ColorBoard";
+import ColorsContainer from "./components/Board/ColorsContainer";
 
 // TODO: Data Validation
 // TODO: Protected Routes
@@ -58,7 +59,7 @@ function App() {
             >
               <Route
                 path=":boardID"
-                element={<ColorBoard />}
+                element={<ColorsContainer />}
               ></Route>
             </Route>
           </Route>

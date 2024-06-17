@@ -6,7 +6,7 @@ import boards from "../data/boards";
 import colors from "../data/colors";
 import useStore from "../store/store";
 import { Outlet, useNavigate } from "react-router-dom";
-import BoardForm from "../components/Board/BoardForm";
+import ColorForm from "../components/Board/ColorForm";
 
 function Board() {
   const colorsData = [
@@ -77,19 +77,10 @@ function Board() {
     }
   };
 
-  useEffect(() => {
-    setCurrColors(
-      boardId
-        ? colors.filter((color) => color.boardId === boardId)
-        : [...colors]
-    );
-  }, [boardId]);
-
   return (
     <div className="bg-dark flex-1 px-4">
       <Sidebar />
       <div className="ml-sidebar transition-[margin] duration-200">
-        <BoardForm />
         <Outlet />
         {/* <Container
           classes="flex justify-center items-center flex-wrap gap-14 mt-16"

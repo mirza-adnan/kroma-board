@@ -4,11 +4,14 @@ import useStore from "../../store/store";
 import { useEffect } from "react";
 import DefaultButton from "./DefaultButton";
 import AddBoard from "./AddBoard";
+import { useLocation } from "react-router-dom";
 
 function Sidebar() {
   const user = useStore((state) => state.user);
   const boards = useStore((state) => state.boards);
   const setBoards = useStore((state) => state.setBoards);
+
+  const { pathname } = useLocation();
 
   const fetchBoards = async () => {
     const boardsRes = await boardService.getBoardsByID(user?._id);
@@ -27,13 +30,15 @@ function Sidebar() {
             board?.default ? (
               <DefaultButton
                 key={board?._id}
-                id={board._id}
+                id={board?._id}
+                active={pathname.includes(board?._id)}
               />
             ) : (
               <BoardButton
                 name={board?.name}
                 id={board?._id}
                 key={board?._id}
+                active={pathname.includes(board?._id)}
               />
             )
           )}

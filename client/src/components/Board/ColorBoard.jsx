@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom";
 import colorService from "../../services/color.service";
 import { useEffect } from "react";
 
-function ColorBoard() {
-  const { boardID } = useParams();
+function ColorBoard({ boardID }) {
   const { _id: userID } = useStore((state) => state.user);
   const setColors = useStore((state) => state.setColors);
   const colors = useStore((state) => state.colors);
@@ -34,7 +33,9 @@ function ColorBoard() {
             className="w-[70px] rounded-full aspect-square cursor-pointer shadow-2xl"
             onClick={() => navigator.clipboard.writeText(color.value)}
           ></div>
-          <p className="font-medium text-bright mt-2">{color.name}</p>
+          <p className="font-medium text-bright mt-2">
+            {color.value.toUpperCase()}
+          </p>
         </div>
       ))}
     </Container>

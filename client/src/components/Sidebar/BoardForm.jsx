@@ -16,7 +16,7 @@ function BoardForm() {
   };
 
   const handleCancel = (e) => {
-    navigate("/board");
+    navigate(-1);
   };
 
   const handleAdd = async (e) => {

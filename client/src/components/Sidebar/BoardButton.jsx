@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
-function BoardButton({ name, id }) {
+function BoardButton({ name, id, active }) {
   return (
     <div className="my-4">
       <Link
         to={`/board/${id}`}
-        className="flex justify-start items-center gap-6 font-bold text-md py-3 px-4 text-center w-full bg-dark rounded-xl text-bright transition-colors hover:bg-accent-light hover:text-accent-dark duration-300"
+        className={clsx(
+          "flex justify-start items-center gap-6 font-bold text-md py-3 px-4 text-center w-full rounded-xl transition-colors duration-300",
+          {
+            "bg-accent text-dark": active,
+            "bg-dark text-bright hover:bg-accent-light hover:text-accent-dark":
+              !active,
+          }
+        )}
       >
         <span>
           <svg
