@@ -6,12 +6,12 @@ import { useEffect } from "react";
 
 function ColorBoard() {
   const { boardID } = useParams();
-  const { _id } = useStore((state) => state.user);
+  const { _id: userID } = useStore((state) => state.user);
   const setColors = useStore((state) => state.setColors);
   const colors = useStore((state) => state.colors);
 
   const fetchColors = async () => {
-    const colorsRes = await colorService.getColors(_id, boardID);
+    const colorsRes = await colorService.getColorsByID(userID, boardID);
     setColors(colorsRes);
   };
 

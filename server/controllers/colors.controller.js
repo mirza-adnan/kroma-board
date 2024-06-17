@@ -3,7 +3,7 @@ const Color = require("../models/Color.model");
 const User = require("../models/User.model");
 const { sendError } = require("../utils/response");
 
-const getColors = asyncHandler(async (req, res) => {
+const getColorsByID = asyncHandler(async (req, res) => {
   const { userID, boardID } = req.params;
   const colors = await Color.find({ userID, boardID });
   return res.status(200).json(colors);
@@ -17,6 +17,6 @@ const createColor = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getColors,
+  getColorsByID,
   createColor,
 };
