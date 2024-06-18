@@ -12,6 +12,7 @@ import Board from "./pages/Board.page";
 import RequireAuth from "./components/RequireAuth";
 import ColorBoard from "./components/Board/ColorBoard";
 import ColorsContainer from "./components/Board/ColorsContainer";
+import AddBoard from "./components/Sidebar/AddBoard";
 
 // TODO: Data Validation
 // TODO: Protected Routes
@@ -58,7 +59,7 @@ function App() {
               element={<Board />}
             >
               <Route
-                path=":boardID"
+                path=":boardID/*"
                 element={<ColorsContainer />}
               ></Route>
             </Route>

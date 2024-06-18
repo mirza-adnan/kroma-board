@@ -26,7 +26,7 @@ function ColorBoard({ boardID }) {
       {colors.map((color) => (
         <div
           className="flex flex-col items-center justify-center"
-          key={color.value}
+          key={color._id}
         >
           <div
             style={{ backgroundColor: color.value }}

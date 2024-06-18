@@ -10,7 +10,7 @@ function AddBoard() {
     <>
       <div className="h-[15%] bg-dark rounded-2xl relative">
         <Link
-          to="/board/add-board"
+          to={`${pathname}/add-board`}
           className="h-full w-full cursor-pointer flex justify-center items-center gap-6 text-xl font-medium transition-colors duration-300 hover:text-accent"
         >
           <span className="absolute left-5 text-3xl">
@@ -19,7 +19,7 @@ function AddBoard() {
           <span>Add Board</span>
         </Link>
       </div>
-      {pathname == "/board/add-board" && <BoardForm />}
+      {pathname.includes("add-board") && <BoardForm />}
     </>
   );
 }

@@ -4,7 +4,7 @@ import useStore from "../../store/store";
 import { useEffect } from "react";
 import DefaultButton from "./DefaultButton";
 import AddBoard from "./AddBoard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const user = useStore((state) => state.user);
@@ -12,10 +12,16 @@ function Sidebar() {
   const setBoards = useStore((state) => state.setBoards);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const fetchBoards = async () => {
     const boardsRes = await boardService.getBoardsByID(user?._id);
     setBoards(boardsRes);
+
+    if (pathname == "/board" || pathname == "/board/") {
+      const { _id } = boardsRes.find((board) => board.default);
+      navigate(_id);
+    }
   };
 
   useEffect(() => {
