@@ -7,10 +7,6 @@ import { useNavigate } from "react-router-dom";
 function Signup() {
   const navigate = useNavigate();
 
-  if (authService.isLoggedIn()) {
-    navigate("/board");
-  }
-
   const [info, setInfo] = useState({
     name: "",
     email: "",

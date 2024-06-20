@@ -6,6 +6,11 @@ const getColorsByID = async (userID, boardID) => {
   return res.data;
 };
 
+const getAllColors = async (userID) => {
+  const res = await axios.get(`${baseURL}/color/${userID}`);
+  return res.data;
+};
+
 const createColor = async (color) => {
   const res = await axios.post(`${baseURL}/color`, color);
   return res.data;
@@ -13,5 +18,6 @@ const createColor = async (color) => {
 
 export default {
   getColorsByID,
+  getAllColors,
   createColor,
 };

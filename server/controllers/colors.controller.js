@@ -9,6 +9,12 @@ const getColorsByID = asyncHandler(async (req, res) => {
   return res.status(200).json(colors);
 });
 
+const getAllColors = asyncHandler(async (req, res) => {
+  const { userID } = req.params;
+  const colors = await Color.find({ userID });
+  return res.status(200).json(colors);
+});
+
 const createColor = asyncHandler(async (req, res) => {
   const color = new Color(req.body);
   const savedColor = await color.save();
@@ -18,5 +24,6 @@ const createColor = asyncHandler(async (req, res) => {
 
 module.exports = {
   getColorsByID,
+  getAllColors,
   createColor,
 };

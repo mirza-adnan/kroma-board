@@ -40,7 +40,6 @@ const verifyUser = asyncHandler(async (req, res) => {
   } else {
     if (!user.verified) {
       user.verified = true;
-      user = await user.save();
 
       const defaultBoard = new Board({
         name: "THE Board",
@@ -48,7 +47,9 @@ const verifyUser = asyncHandler(async (req, res) => {
         default: true,
         userID: id,
       });
-      await defaultBoard.save();
+      const savedBoard = await defaultBoard.save();
+      user.defaultBoardID = savedBoard._id;
+      user = await user.save();
 
       res.status(200).json(user);
     }

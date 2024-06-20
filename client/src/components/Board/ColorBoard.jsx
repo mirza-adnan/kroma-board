@@ -5,12 +5,20 @@ import colorService from "../../services/color.service";
 import { useEffect } from "react";
 
 function ColorBoard({ boardID }) {
-  const { _id: userID } = useStore((state) => state.user);
+  const user = useStore((state) => state.user);
+  const boards = useStore((state) => state.boards);
   const setColors = useStore((state) => state.setColors);
   const colors = useStore((state) => state.colors);
 
   const fetchColors = async () => {
-    const colorsRes = await colorService.getColorsByID(userID, boardID);
+    let colorsRes;
+    if (boardID == user.defaultBoardID) {
+      console.log("here");
+      colorsRes = await colorService.getAllColors(user._id);
+    } else {
+      colorsRes = await colorService.getColorsByID(user._id, boardID);
+    }
+
     setColors(colorsRes);
   };
 

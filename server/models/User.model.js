@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    defaultBoardID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Board",
+    },
   },
   {
     timestamps: true,

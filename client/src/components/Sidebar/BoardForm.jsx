@@ -31,7 +31,7 @@ function BoardForm() {
         });
         setBoards(boards.concat(data));
         setName("");
-        navigate("/board");
+        navigate(`/board/${data._id}`);
       }
     } catch (error) {
       console.log(error.message);
