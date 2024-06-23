@@ -35,7 +35,7 @@ function Signup() {
         password: info.password,
       });
       setUser(user);
-      setInfo({ name: "", email: "", password: "" });
+      setInfo({ name: "", email: "", password: "", password2: "" });
       navigate("/verify");
     } catch (err) {
       console.log(err.response.data);

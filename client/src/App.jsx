@@ -13,6 +13,7 @@ import RequireAuth from "./components/RequireAuth";
 import ColorBoard from "./components/Board/ColorBoard";
 import ColorsContainer from "./components/Board/ColorsContainer";
 import AddBoard from "./components/Sidebar/AddBoard";
+import RequireVerification from "./components/RequireVerification";
 
 // TODO: Data Validation
 // TODO: Protected Routes
@@ -54,14 +55,16 @@ function App() {
               path="/verify"
               element={<VerifyPrompt />}
             />
-            <Route
-              path="/board/*"
-              element={<Board />}
-            >
+            <Route element={<RequireVerification />}>
               <Route
-                path=":boardID/*"
-                element={<ColorsContainer />}
-              ></Route>
+                path="/board/*"
+                element={<Board />}
+              >
+                <Route
+                  path=":boardID/*"
+                  element={<ColorsContainer />}
+                />
+              </Route>
             </Route>
           </Route>
         </Route>
