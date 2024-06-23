@@ -33,7 +33,7 @@ function ColorBoard({ boardID }) {
     >
       {colors.map((color) => (
         <div
-          className="flex flex-col items-center justify-center"
+          className="max-w-[80px] flex flex-col items-center justify-center"
           key={color._id}
         >
           <div
@@ -41,7 +41,7 @@ function ColorBoard({ boardID }) {
             className="w-[70px] rounded-full aspect-square cursor-pointer shadow-2xl"
             onClick={() => navigator.clipboard.writeText(color.value)}
           ></div>
-          <p className="font-medium text-bright mt-2">
+          <p className="font-medium text-bright mt-2 w-full whitespace-nowrap overflow-hidden text-ellipsis">
             {color.value.toUpperCase()}
           </p>
         </div>
