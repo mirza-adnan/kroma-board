@@ -8,15 +8,14 @@ function AddBoard() {
   const { pathname } = useLocation();
   return (
     <>
-      <div className="h-[15%] bg-dark rounded-2xl relative">
+      <div className="h-[15%] relative px-3">
         <Link
           to={`${pathname}/add-board`}
-          className="h-full w-full cursor-pointer flex justify-center items-center gap-6 text-xl font-medium transition-colors duration-300 hover:text-accent"
+          className="cursor-pointer mx-auto font-medium transition-colors duration-300 text-accent block w-[56px] h-[56px] rounded-full"
         >
-          <span className="absolute left-5 text-3xl">
+          <span className="text-6xl">
             <IoIosAddCircle />
           </span>
-          <span>Add Board</span>
         </Link>
       </div>
       {pathname.includes("add-board") && <BoardForm />}
