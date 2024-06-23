@@ -2,7 +2,8 @@ import Container from "../components/Container";
 import { useState } from "react";
 import useStore from "../store/store";
 import authService from "../services/auth.service";
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import FormInput from "../components/FormInput";
 
 function Signup() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function Signup() {
     name: "",
     email: "",
     password: "",
+    password2: "",
   });
 
   const setUser = useStore((state) => state.setUser);
@@ -49,54 +51,39 @@ function Signup() {
             onSubmit={handleSignup}
             className="flex flex-col gap-6"
           >
-            <div>
-              <label
-                htmlFor=""
-                className="font-medium text-lg block"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                value={info.name}
-                name="name"
-                onChange={handleChange}
-                className="w-full py-2 px-2 rounded-md mt-1 text-bright bg-dark shadow-lg shadow-darkish-700"
-                placeholder="e.g. Matty Healy"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className="font-medium text-lg block"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                value={info.email}
-                name="email"
-                onChange={handleChange}
-                className="w-full py-2 px-2 rounded-md mt-1 text-bright bg-dark shadow-lg shadow-darkish-700"
-                placeholder="e.g. matty@1975.com"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className="font-medium text-lg block"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                value={info.password}
-                name="password"
-                onChange={handleChange}
-                className="w-full py-2 px-2 rounded-md mt-1 text-bright bg-dark shadow-lg shadow-darkish-700"
-                placeholder="e.g. chipichipichapachapa278"
-              />
-            </div>
+            <FormInput
+              label="Name"
+              type="text"
+              value={info.name}
+              name="name"
+              placeholder="e.g. Matty Healy"
+              handleChange={handleChange}
+            />
+            <FormInput
+              label="Email"
+              type="email"
+              value={info.email}
+              name="email"
+              placeholder="e.g. matty@1975.com"
+              handleChange={handleChange}
+            />
+            <FormInput
+              label="Password"
+              type="password"
+              value={info.password}
+              name="password"
+              placeholder="e.g. chipichipichapachapa278"
+              handleChange={handleChange}
+            />
+            <FormInput
+              label="Confirm Password"
+              type="password"
+              value={info.password2}
+              name="password2"
+              placeholder="e.g. chipichipichapachapa278"
+              handleChange={handleChange}
+            />
+
             <button
               type="submit"
               className="w-full py-2 rounded-md bg-accent text-dark font-semibold mt-2 shadow-lg shadow-darkish-700 text-lg"

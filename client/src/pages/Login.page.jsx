@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Container from "../components/Container";
 import useStore from "../store/store";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, Form } from "react-router-dom";
 import authService from "../services/auth.service";
+import FormInput from "../components/FormInput";
 
 function Login() {
   const [info, setInfo] = useState({
@@ -48,38 +49,22 @@ function Login() {
             onSubmit={handleLogin}
             className="flex flex-col gap-6"
           >
-            <div>
-              <label
-                htmlFor=""
-                className="font-medium text-lg block"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={info.email}
-                onChange={handleChange}
-                className="w-full py-2 px-2 rounded-md mt-1 text-bright bg-dark shadow-lg shadow-darkish-700"
-                placeholder="e.g. matty@1975.com"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className="font-medium text-lg block"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                value={info.password}
-                onChange={handleChange}
-                className="w-full py-2 px-2 rounded-md mt-1 text-bright bg-dark shadow-lg shadow-darkish-700"
-                placeholder="e.g. chipichipichapachapa278"
-              />
-            </div>
+            <FormInput
+              label="Email"
+              name="email"
+              type="email"
+              value={info.email}
+              placeholder="matty@1975.com"
+              handleChange={handleChange}
+            />
+            <FormInput
+              label="Password"
+              name="password"
+              type="password"
+              value={info.password}
+              placeholder="chipichipichapachapa278"
+              handleChange={handleChange}
+            />
             <button
               type="submit"
               className="w-full py-2 rounded-md bg-accent text-dark font-semibold mt-2 shadow-lg shadow-darkish-700 text-lg"
