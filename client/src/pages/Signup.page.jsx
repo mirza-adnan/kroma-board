@@ -2,7 +2,7 @@ import Container from "../components/Container";
 import { useState } from "react";
 import useStore from "../store/store";
 import authService from "../services/auth.service";
-import { Form, useNavigate } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
 
 function Signup() {
@@ -91,6 +91,18 @@ function Signup() {
               Sign Up
             </button>
           </form>
+          <p
+            style={{ color: "#d0d0d0" }}
+            className="mt-4"
+          >
+            Already have an account? Login{" "}
+            <Link
+              to="/signup"
+              className="text-accent underline"
+            >
+              here.
+            </Link>
+          </p>
         </div>
       </div>
     </Container>
