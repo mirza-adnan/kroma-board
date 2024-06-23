@@ -97,7 +97,7 @@ function Signup() {
           >
             Already have an account? Login{" "}
             <Link
-              to="/signup"
+              to="/login"
               className="text-accent underline"
             >
               here.
