@@ -29,9 +29,9 @@ function Sidebar() {
   }, [user?._id]);
 
   return (
-    <div className="w-sidebar bg-darkish-500 absolute top-0 left-0 h-[calc(100dvh-70px)] mt-header px-2 py-4">
+    <div className="w-sidebar bg-darkish-500 absolute top-0 left-0 h-[calc(100dvh-70px)] mt-header">
       <div className="relative h-full">
-        <div className="h-[85%] overflow-auto">
+        <div className="board-container h-[85%] overflow-auto px-3 py-4">
           {boards.map((board) =>
             board?.default ? (
               <DefaultButton

@@ -28,3 +28,15 @@ body,
   display: flex;
   flex-direction: column;
 }
+
+.board-container::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.board-container::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.board-container::-webkit-scrollbar-thumb {
+  background: #ffd008;
+}
