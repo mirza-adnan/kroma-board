@@ -12,8 +12,39 @@ function Signup() {
     name: "",
     email: "",
     password: "",
-    password2: "",
+    confirmPassword: "",
   });
+
+  const inputs = [
+    {
+      id: 1,
+      label: "Name",
+      name: "name",
+      type: "text",
+      placeholder: "Your Name",
+    },
+    {
+      id: 2,
+      label: "Email",
+      name: "email",
+      type: "email",
+      placeholder: "Your Email",
+    },
+    {
+      id: 3,
+      label: "Password",
+      name: "password",
+      type: "password",
+      placeholder: "Enter a Password",
+    },
+    {
+      id: 4,
+      label: "Confirm Password",
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Re-enter Password",
+    },
+  ];
 
   const setUser = useStore((state) => state.setUser);
 
@@ -29,14 +60,18 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const user = await authService.signup({
-        name: info.name,
-        email: info.email,
-        password: info.password,
-      });
-      setUser(user);
-      setInfo({ name: "", email: "", password: "", password2: "" });
-      navigate("/verify");
+      if (info.password === info.confirmPassword) {
+        const user = await authService.signup({
+          name: info.name,
+          email: info.email,
+          password: info.password,
+        });
+        setUser(user);
+        setInfo({ name: "", email: "", password: "", confirmPassword: "" });
+        navigate("/verify");
+      } else {
+        alert("Passwords do not match.");
+      }
     } catch (err) {
       console.log(err.response.data);
     }
@@ -51,39 +86,17 @@ function Signup() {
             onSubmit={handleSignup}
             className="flex flex-col gap-6"
           >
-            <FormInput
-              label="Name"
-              type="text"
-              value={info.name}
-              name="name"
-              placeholder="e.g. Matty Healy"
-              handleChange={handleChange}
-            />
-            <FormInput
-              label="Email"
-              type="email"
-              value={info.email}
-              name="email"
-              placeholder="e.g. matty@1975.com"
-              handleChange={handleChange}
-            />
-            <FormInput
-              label="Password"
-              type="password"
-              value={info.password}
-              name="password"
-              placeholder="e.g. chipichipichapachapa278"
-              handleChange={handleChange}
-            />
-            <FormInput
-              label="Confirm Password"
-              type="password"
-              value={info.password2}
-              name="password2"
-              placeholder="e.g. chipichipichapachapa278"
-              handleChange={handleChange}
-            />
-
+            {inputs.map((input) => (
+              <FormInput
+                key={input.id}
+                label={input.label}
+                type={input.type}
+                value={info[input.name]}
+                name={input.name}
+                placeholder={input.placeholder}
+                handleChange={handleChange}
+              />
+            ))}
             <button
               type="submit"
               className="w-full py-2 rounded-md bg-accent text-dark font-semibold mt-2 shadow-lg shadow-darkish-700 text-lg"

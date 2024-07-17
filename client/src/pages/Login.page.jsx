@@ -4,6 +4,7 @@ import useStore from "../store/store";
 import { useNavigate, useLocation, Link, Form } from "react-router-dom";
 import authService from "../services/auth.service";
 import FormInput from "../components/FormInput";
+import inputErrors from "../lib/inputErrors";
 
 function Login() {
   const [info, setInfo] = useState({
@@ -16,6 +17,25 @@ function Login() {
   const navigate = useNavigate();
   const { search } = useLocation();
   // const redirect = new URLSearchParams(search).get("redirect") || "/board";
+
+  const inputs = [
+    {
+      id: 1,
+      label: "Email",
+      name: "email",
+      type: "email",
+      placeholder: "e.g. matty@1975.com",
+      errorMessage: inputErrors.email,
+    },
+    {
+      id: 2,
+      label: "Password",
+      name: "password",
+      type: "password",
+      placeholder: "e.g. chipichipichapachapa75",
+      errorMessage: inputErrors.password,
+    },
+  ];
 
   const handleChange = (e) => {
     setInfo((prev) => {
@@ -49,22 +69,18 @@ function Login() {
             onSubmit={handleLogin}
             className="flex flex-col gap-6"
           >
-            <FormInput
-              label="Email"
-              name="email"
-              type="email"
-              value={info.email}
-              placeholder="matty@1975.com"
-              handleChange={handleChange}
-            />
-            <FormInput
-              label="Password"
-              name="password"
-              type="password"
-              value={info.password}
-              placeholder="chipichipichapachapa278"
-              handleChange={handleChange}
-            />
+            {inputs.map((input) => (
+              <FormInput
+                key={input.id}
+                label={input.label}
+                name={input.name}
+                type={input.type}
+                value={info[input.name]}
+                placeholder={input.placeholder}
+                errorMessage={input.errorMessage}
+                handleChange={handleChange}
+              />
+            ))}
             <button
               type="submit"
               className="w-full py-2 rounded-md bg-accent text-dark font-semibold mt-2 shadow-lg shadow-darkish-700 text-lg"
