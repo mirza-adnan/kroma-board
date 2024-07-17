@@ -1,5 +1,6 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const Board = require("../models/Board.model");
+const Color = require("../models/Color.model");
 const { sendMsg, sendError } = require("../utils/response");
 
 const createDefaultBoard = asyncHandler(async (req, res) => {
@@ -33,8 +34,16 @@ const createBoard = asyncHandler(async (req, res) => {
   res.status(201).json(savedBoard);
 });
 
+const deleteBoardByID = asyncHandler(async (req, res) => {
+  const { boardID } = req.params;
+  await Board.findByIdAndDelete(boardID);
+  await Color.deleteMany({ boardID });
+  res.sendStatus(202);
+});
+
 module.exports = {
   createDefaultBoard,
   getBoardsByID,
   createBoard,
+  deleteBoardByID,
 };
