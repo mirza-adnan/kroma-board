@@ -12,16 +12,10 @@ function Sidebar() {
   const setBoards = useStore((state) => state.setBoards);
 
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const fetchBoards = async () => {
     const boardsRes = await boardService.getBoardsByID(user?._id);
     setBoards(boardsRes);
-
-    if (pathname == "/board" || pathname == "/board/") {
-      const { _id } = boardsRes.find((board) => board.default);
-      navigate(_id);
-    }
   };
 
   useEffect(() => {
@@ -29,9 +23,9 @@ function Sidebar() {
   }, [user?._id]);
 
   return (
-    <div className="w-sidebar bg-darkish-500 absolute top-0 left-0 h-[calc(100dvh-70px)] mt-header">
-      <div className="relative h-full">
-        <div className="board-container h-[85%] overflow-auto px-3 py-4">
+    <div className="w-sidebar bg-darkish-500 fixed top-0 left-0 h-[calc(100dvh-70px)] mt-header z-20">
+      <div className="h-full">
+        <div className="board-container h-[85%] overflow-y-auto px-3 py-4">
           {boards.map((board) =>
             board?.default ? (
               <DefaultButton
