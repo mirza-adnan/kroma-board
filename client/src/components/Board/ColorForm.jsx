@@ -16,7 +16,7 @@ function ColorForm({ boardID }) {
       const color = validateColor(value);
       if (color) {
         const colorRes = await colorService.createColor({
-          value,
+          value: color,
           hex: "",
           boardID,
           userID,

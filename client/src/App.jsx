@@ -15,20 +15,17 @@ import ColorsContainer from "./components/Board/ColorsContainer";
 import AddBoard from "./components/Sidebar/AddBoard";
 import RequireVerification from "./components/RequireVerification";
 
-// TODO: Data Validation
-// TODO: Protected Routes
-
 function App() {
-  const setUser = useStore((state) => state.setUser);
-  const navigate = useNavigate();
-  const user = useStore((state) => state.user);
+  // const setUser = useStore((state) => state.setUser);
+  // const navigate = useNavigate();
+  // const user = useStore((state) => state.user);
 
   // controlling where to go on intitial page load based on logged in status
-  useEffect(() => {
-    if (!authService.isLoggedIn()) {
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!authService.isLoggedIn()) {
+  //     navigate("/login");
+  //   }
+  // }, []);
 
   return (
     <>

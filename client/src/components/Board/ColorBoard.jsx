@@ -41,7 +41,7 @@ function ColorBoard({ boardID }) {
             className="w-[70px] rounded-full aspect-square cursor-pointer shadow-2xl"
             onClick={() => navigator.clipboard.writeText(color.value)}
           ></div>
-          <p className="font-medium text-bright mt-2 w-full whitespace-nowrap overflow-hidden text-ellipsis">
+          <p className="font-medium text-bright mt-2 w-full whitespace-nowrap overflow-hidden text-ellipsis text-center">
             {color.value.toUpperCase()}
           </p>
         </div>
