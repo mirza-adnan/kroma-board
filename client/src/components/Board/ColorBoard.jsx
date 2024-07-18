@@ -13,7 +13,6 @@ function ColorBoard({ boardID }) {
   const fetchColors = async () => {
     let colorsRes;
     if (boardID == user.defaultBoardID) {
-      console.log("here");
       colorsRes = await colorService.getAllColors(user._id);
     } else {
       colorsRes = await colorService.getColorsByID(user._id, boardID);

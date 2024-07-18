@@ -27,18 +27,15 @@ export const universalPattern = new RegExp(
 );
 
 export const validateColor = (val) => {
-  console.log(val);
   let color;
   if (val.match(hexPattern)) {
     color = val.match(hexPattern)[0];
     if (color[0] !== "#") {
       color = "#" + color;
-      console.log("Here2");
     }
     return color;
   } else if (val.match(universalPattern)) {
     color = val.match(universalPattern)[0];
-    console.log("Here3");
     return color;
   }
   return false;
