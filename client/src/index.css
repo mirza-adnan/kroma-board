@@ -40,3 +40,22 @@ body,
 .board-container::-webkit-scrollbar-thumb {
   background: #ffd008;
 }
+
+#color-picker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+}
+#color-picker::-webkit-color-swatch {
+  border-radius: 50%;
+  border: 1px solid #525252;
+}
+#color-picker::-moz-color-swatch {
+  border-radius: 50%;
+  border: 1px solid #525252;
+}
