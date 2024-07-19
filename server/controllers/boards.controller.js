@@ -41,9 +41,18 @@ const deleteBoardByID = asyncHandler(async (req, res) => {
   res.sendStatus(202);
 });
 
+const editBoardNameByID = asyncHandler(async (req, res) => {
+  const { boardID, name } = req.body;
+  let board = await Board.findById(boardID);
+  board.name = name;
+  board = await board.save();
+  res.status(200).json(board);
+});
+
 module.exports = {
   createDefaultBoard,
   getBoardsByID,
   createBoard,
   deleteBoardByID,
+  editBoardNameByID,
 };

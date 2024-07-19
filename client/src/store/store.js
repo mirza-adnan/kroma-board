@@ -9,6 +9,10 @@ const useStore = create((set) => ({
   setCurrBoardID: (newBoardID) => set(() => ({ currBoardID: newBoardID })),
   colors: [],
   setColors: (newColors) => set(() => ({ colors: newColors })),
+  edit: false,
+  setEdit: (newEdit) => set(() => ({ edit: newEdit })),
+  editValue: "",
+  setEditValue: (newValue) => set(() => ({ editValue: newValue })),
 }));
 
 export default useStore;

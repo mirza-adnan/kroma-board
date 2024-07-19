@@ -16,8 +16,17 @@ const createColor = async (color) => {
   return res.data;
 };
 
+const deleteColorByID = async (colorID) => {
+  try {
+    await axios.delete(`${baseURL}/color/${colorID}`);
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
 export default {
   getColorsByID,
   getAllColors,
   createColor,
+  deleteColorByID,
 };

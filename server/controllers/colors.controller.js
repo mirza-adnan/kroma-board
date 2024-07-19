@@ -22,8 +22,15 @@ const createColor = asyncHandler(async (req, res) => {
   res.status(201).json(savedColor);
 });
 
+const deleteColorByID = asyncHandler(async (req, res) => {
+  const { colorID } = req.params;
+  await Color.findByIdAndDelete(colorID);
+  res.sendStatus(202);
+});
+
 module.exports = {
   getColorsByID,
   getAllColors,
   createColor,
+  deleteColorByID,
 };

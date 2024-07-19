@@ -31,7 +31,19 @@ const createBoard = async (board) => {
 const deleteBoardByID = async (boardID) => {
   try {
     const res = await axios.delete(`${baseURL}/board/${boardID}`);
-    return res;
+    return res.data;
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
+
+const editBoardNameByID = async (boardID, name) => {
+  try {
+    const res = await axios.put(`${baseURL}/board/edit-name`, {
+      boardID,
+      name,
+    });
+    return res.data;
   } catch (e) {
     console.log(e.response.data);
   }
@@ -42,4 +54,5 @@ export default {
   getBoardsByID,
   createBoard,
   deleteBoardByID,
+  editBoardNameByID,
 };

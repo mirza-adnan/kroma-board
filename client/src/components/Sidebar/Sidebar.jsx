@@ -1,10 +1,11 @@
-import BoardButton from "./BoardButton";
+import BoardLink from "./BoardLink";
 import boardService from "../../services/board.service";
 import useStore from "../../store/store";
 import { useEffect } from "react";
 import DefaultButton from "./DefaultButton";
 import AddBoard from "./AddBoard";
 import { useLocation, useNavigate } from "react-router-dom";
+import EditForm from "./EditForm";
 
 function Sidebar() {
   const user = useStore((state) => state.user);
@@ -34,7 +35,7 @@ function Sidebar() {
                 active={pathname.includes(board?._id)}
               />
             ) : (
-              <BoardButton
+              <BoardLink
                 name={board?.name}
                 id={board?._id}
                 key={board?._id}
