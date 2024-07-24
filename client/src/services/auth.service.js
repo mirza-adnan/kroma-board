@@ -18,13 +18,17 @@ const verifyUser = async (id) => {
 };
 
 const login = async (info) => {
-  const res = await axios.post(`${baseURL}/user/login`, info);
+  const res = await axios.post(`${baseURL}/user/login`, info, {
+    withCredentials: true,
+  });
   saveUserToLocal(res.data);
   return res.data;
 };
 
 const logout = async () => {
-  const res = await axios.get(`${baseURL}/user/logout`);
+  const res = await axios.get(`${baseURL}/user/logout`, {
+    withCredentials: true,
+  });
   localStorage.removeItem("user");
 };
 

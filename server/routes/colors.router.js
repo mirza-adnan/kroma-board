@@ -5,12 +5,13 @@ const {
   createColor,
   deleteColorByID,
 } = require("../controllers/colors.controller");
+const { protect } = require("../middleware/authMiddleware");
 
 const colorsRouter = express.Router();
 
-colorsRouter.get("/:userID", getAllColors);
-colorsRouter.get("/:userID/:boardID", getColorsByID);
-colorsRouter.post("/", createColor);
-colorsRouter.delete("/:colorID", deleteColorByID);
+colorsRouter.get("/:userID", protect, getAllColors);
+colorsRouter.get("/:userID/:boardID", protect, getColorsByID);
+colorsRouter.post("/", protect, createColor);
+colorsRouter.delete("/:colorID", protect, deleteColorByID);
 
 module.exports = colorsRouter;

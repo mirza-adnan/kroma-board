@@ -1,4 +1,5 @@
 const clearJwtCookie = (res) => {
+  console.log("cleared token");
   res.clearCookie("jwt");
 };
 
