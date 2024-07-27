@@ -69,7 +69,7 @@ const loginUser = asyncHandler(async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       sameSite: "strict",
-      maxAge: 24 * 3600 * 1000,
+      maxAge: 30 * 24 * 3600 * 1000,
     });
     //setJwtCookie(res, user._id, "30d");
     res.json(user);
