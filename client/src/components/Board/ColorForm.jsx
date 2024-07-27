@@ -47,7 +47,7 @@ function ColorForm({ boardID }) {
       }
       return color;
     }
-    return "#000000";
+    return "#121212";
   };
 
   return (
