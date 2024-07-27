@@ -4,9 +4,12 @@ import useStore from "../store/store";
 import authService from "../services/auth.service";
 import { Form, Link, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
+import signupValidator from "../schemas/signupSchema";
+import FormInputWithValidation from "../components/FormInputWithValidation";
 
 function Signup() {
   const navigate = useNavigate();
+  const setUser = useStore((state) => state.setUser);
 
   const [info, setInfo] = useState({
     name: "",
@@ -15,6 +18,8 @@ function Signup() {
     confirmPassword: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const inputs = [
     {
       id: 1,
@@ -22,6 +27,7 @@ function Signup() {
       name: "name",
       type: "text",
       placeholder: "Your Name",
+      validator: signupValidator.name,
     },
     {
       id: 2,
@@ -29,6 +35,7 @@ function Signup() {
       name: "email",
       type: "email",
       placeholder: "Your Email",
+      validator: signupValidator.email,
     },
     {
       id: 3,
@@ -36,6 +43,7 @@ function Signup() {
       name: "password",
       type: "password",
       placeholder: "Enter a Password",
+      validator: signupValidator.password,
     },
     {
       id: 4,
@@ -43,10 +51,9 @@ function Signup() {
       name: "confirmPassword",
       type: "password",
       placeholder: "Re-enter Password",
+      validator: signupValidator.confirmPassword,
     },
   ];
-
-  const setUser = useStore((state) => state.setUser);
 
   const handleChange = (e) => {
     setInfo((prev) => {
@@ -60,7 +67,8 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      if (info.password === info.confirmPassword) {
+      await signupValidator.signupSchema.validate(info, { abortEarly: false });
+      try {
         const user = await authService.signup({
           name: info.name,
           email: info.email,
@@ -69,25 +77,57 @@ function Signup() {
         setUser(user);
         setInfo({ name: "", email: "", password: "", confirmPassword: "" });
         navigate("/verify");
-      } else {
-        alert("Passwords do not match.");
+      } catch (err) {
+        console.log(err.response.data);
       }
     } catch (err) {
-      console.log(err.response.data);
+      const newErrors = {};
+      err.inner.forEach((e) => {
+        newErrors[e.path] = e.message;
+      });
+      setErrors(newErrors);
     }
+
+    // try {
+    //   if (info.password === info.confirmPassword) {
+    //     const user = await authService.signup({
+    //       name: info.name,
+    //       email: info.email,
+    //       password: info.password,
+    //     });
+    //     setUser(user);
+    //     setInfo({ name: "", email: "", password: "", confirmPassword: "" });
+    //     navigate("/verify");
+    //   } else {
+    //     alert("Passwords do not match.");
+    //   }
+    // } catch (err) {
+    //   console.log(err.response.data);
+    // }
+  };
+
+  const validateField = (name) => {
+    return async () => {
+      try {
+        await signupValidator[name].validate(info[name]);
+        setErrors({ ...errors, [name]: "" });
+      } catch (err) {
+        setErrors({ ...errors, [name]: err.message });
+      }
+    };
   };
 
   return (
-    <Container classes="flex justify-center items-center my-16">
+    <Container classes="flex justify-center items-center my-0">
       <div className="bg-darkish-400 p-3 md:p-6 rounded-lg max-w-[400px] w-[95%]">
         <h2 className="text-3xl font-semibold text-center">Sign Up</h2>
         <div className="mt-12">
           <form
             onSubmit={handleSignup}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-2"
           >
             {inputs.map((input) => (
-              <FormInput
+              <FormInputWithValidation
                 key={input.id}
                 label={input.label}
                 type={input.type}
@@ -95,11 +135,13 @@ function Signup() {
                 name={input.name}
                 placeholder={input.placeholder}
                 handleChange={handleChange}
+                validate={validateField(input.name)}
+                error={errors?.[input.name]}
               />
             ))}
             <button
               type="submit"
-              className="w-full py-2 rounded-md bg-accent text-dark font-semibold mt-2 shadow-lg shadow-darkish-700 text-lg"
+              className="w-full py-2 rounded-md bg-accent text-dark font-semibold mt-4 shadow-lg shadow-darkish-700 text-lg"
             >
               Sign Up
             </button>

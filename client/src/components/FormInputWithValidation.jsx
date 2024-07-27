@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { FaExclamationCircle } from "react-icons/fa";
 
-function FormInput({ label, type, placeholder, handleChange, value, name }) {
+export default function FormInputWithValidation({
+  label,
+  type,
+  placeholder,
+  handleChange,
+  value,
+  name,
+  validate,
+  error,
+}) {
   return (
     <div>
       <label
@@ -17,8 +26,16 @@ function FormInput({ label, type, placeholder, handleChange, value, name }) {
         placeholder={placeholder || ""}
         value={value}
         onChange={handleChange}
+        onBlur={validate}
       />
+      {error && (
+        <span className="text-sm text-red-500 m-2 flex items-center gap-2">
+          <span className="text-sm">
+            <FaExclamationCircle />
+          </span>
+          {error}
+        </span>
+      )}
     </div>
   );
 }
-export default FormInput;
