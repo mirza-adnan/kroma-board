@@ -6,13 +6,17 @@ const saveUserToLocal = (user) => {
 };
 
 const signup = async (info) => {
-  const res = await axios.post(`${baseURL}/user/signup`, info);
+  const res = await axios.post(`${baseURL}/user/signup`, info, {
+    withCredentials: true,
+  });
   saveUserToLocal(res.data);
   return res.data;
 };
 
 const verifyUser = async (id) => {
-  const res = await axios.get(`${baseURL}/user/verify/${id}`);
+  const res = await axios.get(`${baseURL}/user/verify/${id}`, {
+    withCredentials: true,
+  });
   saveUserToLocal(res.data);
   return res.data;
 };
@@ -40,6 +44,10 @@ const getFromLocal = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const removeFromLocal = () => {
+  localStorage.removeItem("user");
+};
+
 export default {
   signup,
   verifyUser,
@@ -47,4 +55,5 @@ export default {
   logout,
   isLoggedIn,
   getFromLocal,
+  removeFromLocal,
 };
