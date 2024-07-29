@@ -13,6 +13,7 @@ function Sidebar() {
   const setBoards = useStore((state) => state.setBoards);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const fetchBoards = async () => {
     const boardsRes = await boardService.getBoardsByID(user?._id);

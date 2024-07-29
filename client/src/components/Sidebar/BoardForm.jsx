@@ -54,7 +54,7 @@ function BoardForm() {
           <div className="flex justify-center gap-4 items-center">
             <button
               type="submit"
-              className="bg-accent h-[43px] px-8 rounded-full font-medium text-md text-dark w-1/3"
+              className="bg-accent h-[43px] px-8 rounded-full font-semibold text-md text-dark w-1/3"
               onClick={handleAdd}
             >
               Add
